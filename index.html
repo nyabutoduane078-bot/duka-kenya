@@ -1,1 +1,132 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>DUKA KENYA | Online Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">DUKA<span>KENYA</span></div>
+
+    <div class="search-box">
+        <input type="search" id="searchInput"
+        placeholder="Search products, brands and categories...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <div class="header-actions">
+        <button onclick="showLogin()">Account</button>
+        <button onclick="showCart()">🛒 Cart <span id="cartCount">0</span></button>
+    </div>
+</header>
+
+<nav class="navbar">
+    <a href="#">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#products">Products</a>
+    <a href="#deals">Today's Deals</a>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <p>WELCOME TO DUKA KENYA</p>
+        <h1>Everything You Need.<br>Delivered To Your Door.</h1>
+        <p>Discover amazing products at affordable prices.</p>
+        <a href="#products" class="shop-button">SHOP NOW</a>
+    </div>
+</section>
+
+<section class="benefits">
+    <div>🚚 <strong>Fast Delivery</strong></div>
+    <div>🔒 <strong>Secure Shopping</strong></div>
+    <div>💳 <strong>Easy Payments</strong></div>
+    <div>⭐ <strong>Quality Products</strong></div>
+</section>
+
+<section id="categories" class="section">
+    <h2>Shop By Category</h2>
+
+    <div class="categories">
+        <div class="category">📱<p>Electronics</p></div>
+        <div class="category">👕<p>Fashion</p></div>
+        <div class="category">🏠<p>Home & Living</p></div>
+        <div class="category">💄<p>Beauty</p></div>
+        <div class="category">⌚<p>Accessories</p></div>
+        <div class="category">🎮<p>Gaming</p></div>
+    </div>
+</section>
+
+<section id="deals" class="deals">
+    <h2>🔥 Today's Best Deals</h2>
+    <p>Discover great products at great prices.</p>
+</section>
+
+<section id="products" class="section">
+    <h2>Popular Products</h2>
+
+    <div id="productGrid" class="product-grid">
+
+        <div class="product">
+            <div class="product-image">📱</div>
+            <h3>Smartphone</h3>
+            <p class="price">KSh 15,999</p>
+            <button onclick="addToCart('Smartphone',15999)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <div class="product-image">🎧</div>
+            <h3>Wireless Headphones</h3>
+            <p class="price">KSh 2,499</p>
+            <button onclick="addToCart('Wireless Headphones',2499)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <div class="product-image">⌚</div>
+            <h3>Smart Watch</h3>
+            <p class="price">KSh 3,999</p>
+            <button onclick="addToCart('Smart Watch',3999)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <div class="product-image">💻</div>
+            <h3>Laptop</h3>
+            <p class="price">KSh 45,999</p>
+            <button onclick="addToCart('Laptop',45999)">
+                Add to Cart
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<section class="newsletter">
+    <h2>Join DUKA KENYA</h2>
+    <p>Stay updated with our latest products and offers.</p>
+    <input type="email" placeholder="Enter your email">
+    <button type="button" onclick="alert('Newsletter registration coming soon!')">
+        Subscribe
+    </button>
+</section>
+
+<footer>
+    <h2>DUKA KENYA</h2>
+    <p>Your trusted online shopping destination.</p>
+    <p>© 2026 DUKA KENYA. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
