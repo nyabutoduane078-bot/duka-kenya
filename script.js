@@ -1,5 +1,6 @@
-
+// ==========================================
 // DUKA KENYA SHOPPING SYSTEM
+// ==========================================
 
 let cart = JSON.parse(localStorage.getItem("dukaCart") || "[]");
 
@@ -11,27 +12,26 @@ function saveCart() {
 
 // UPDATE CART COUNTER
 function updateCartCount() {
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById("cartCount").textContent = count;
+    const counter = document.getElementById("cartCount");
+
+    if (counter) {
+        counter.textContent = cart.reduce(
+            (total, item) => total + item.quantity, 0
+        );
+    }
 }
 
 // ADD PRODUCT TO CART
 function addToCart(name, price) {
-
     const existing = cart.find(item => item.name === name);
 
     if (existing) {
         existing.quantity++;
     } else {
-        cart.push({
-            name: name,
-            price: price,
-            quantity: 1
-        });
+        cart.push({ name, price, quantity: 1 });
     }
 
     saveCart();
-
     alert(name + " added to your shopping cart!");
 }
 
@@ -64,9 +64,8 @@ function formatPrice(price) {
     return "KSh " + price.toLocaleString("en-KE");
 }
 
-// DISPLAY SHOPPING CART
+// DISPLAY CART
 function showCart() {
-
     let total = 0;
 
     const items = cart.map(item => {
@@ -77,16 +76,10 @@ function showCart() {
             <div style="padding:15px;border-bottom:1px solid #ddd">
                 <strong>${item.name}</strong>
                 <p>${formatPrice(item.price)}</p>
-
                 <button onclick="changeQuantity('${item.name}',-1)">−</button>
-
                 ${item.quantity}
-
                 <button onclick="changeQuantity('${item.name}',1)">+</button>
-
-                <button onclick="removeFromCart('${item.name}')">
-                    Remove
-                </button>
+                <button onclick="removeFromCart('${item.name}')">Remove</button>
             </div>
         `;
     }).join("");
@@ -112,43 +105,13 @@ function showCart() {
     }
 
     modal.innerHTML = `
-        <div style="
-            background:white;
-            padding:25px;
-            border-radius:12px;
-            width:100%;
-            max-width:450px;
-            max-height:85vh;
-            overflow:auto;
-        ">
+        <div style="background:white;padding:25px;border-radius:12px;
+        width:100%;max-width:450px;max-height:85vh;overflow:auto;">
             <h2>🛒 Your Shopping Cart</h2>
-
             ${items || "<p>Your cart is empty.</p>"}
-
-            <h3 style="margin-top:20px">
-                Total: ${formatPrice(total)}
-            </h3>
-
-            <button onclick="checkout()" style="
-                background:#f68b1e;
-                color:white;
-                padding:12px;
-                border:0;
-                margin-top:15px;
-                width:100%;
-                cursor:pointer;
-            ">
-                PROCEED TO CHECKOUT
-            </button>
-
-            <button onclick="closeCart()" style="
-                padding:12px;
-                margin-top:10px;
-                width:100%;
-                cursor:pointer;
-            ">
-                Continue Shopping
-            </button>
+            <h3>Total: ${formatPrice(total)}</h3>
+            <button onclick="checkout()">PROCEED TO CHECKOUT</button>
+            <button onclick="closeCart()">Continue Shopping</button>
         </div>
     `;
 }
@@ -156,78 +119,79 @@ function showCart() {
 // CLOSE CART
 function closeCart() {
     const modal = document.getElementById("cartModal");
-
     if (modal) modal.remove();
 }
 
-// SEARCH PRODUCTS
-function searchProducts() {
-
-    const input = document.getElementById("searchInput")
-        .value.toLowerCase().trim();
-
-    const products = document.querySelectorAll(".product");
-
-    products.forEach(product => {
-
-        const name = product.querySelector("h3")
-            .textContent.toLowerCase();
-
-        product.style.display = name.includes(input)
-            ? "block"
-            : "none";
-    });
-
-    document.getElementById("products").scrollIntoView({
-        behavior: "smooth"
-    });
-}
-
-// SEARCH WHEN ENTER IS PRESSED
-document.getElementById("searchInput").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        searchProducts();
-    }
-});
-
-// LOGIN PLACEHOLDER
-function showLogin() {
-    alert("Customer registration and login will be added in a later development step.");
-}
-
-// CHECKOUT PLACEHOLDER
+// CHECKOUT
 function checkout() {
     if (cart.length === 0) {
         alert("Your shopping cart is empty!");
         return;
     }
 
-    alert("Checkout system is coming in the next development stage.");
+    alert("Checkout is being prepared. Payment integration is coming next!");
 }
 
-// INITIALIZE SHOPPING SYSTEM
-updateCartCount();
-// DUKA KENYA - SUPABASE CONNECTION
+// SEARCH PRODUCTS
+function searchProducts() {
+    const search = document.getElementById("searchInput");
+
+    if (!search) return;
+
+    const input = search.value.toLowerCase().trim();
+
+    document.querySelectorAll(".product").forEach(product => {
+        const heading = product.querySelector("h3");
+        const name = heading ? heading.textContent.toLowerCase() : "";
+
+        product.style.display = name.includes(input) ? "block" : "none";
+    });
+}
+
+// SEARCH WITH ENTER
+document.addEventListener("DOMContentLoaded", function () {
+    const search = document.getElementById("searchInput");
+
+    if (search) {
+        search.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") searchProducts();
+        });
+    }
+
+    updateCartCount();
+});
+
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
 
 const SUPABASE_URL = "https://lqfofogdythejkguhjaz.supabase.co";
 
-const SUPABASE_KEY = ";sb_publishable_S5HLkybpENjYJJ6100yD7Q_myBMpasa
+// REPLACE THIS WITH YOUR REAL PUBLISHABLE KEY
+const SUPABASE_KEY = "sb_publishable_S5HLkybpENjYJJ6100yD7Q_myBMpasa";
 
 async function initializeSupabase() {
-    const { createClient } = await import(
-        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
-    );
+    try {
+        const { createClient } = await import(
+            "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+        );
 
-    window.dukaSupabase = createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+        window.dukaSupabase = createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
 
-    console.log("DUKA KENYA connected to Supabase!");
+        console.log("DUKA KENYA connected to Supabase!");
+    } catch (error) {
+        console.error("Supabase connection failed:", error);
+    }
 }
 
 initializeSupabase();
+
+// ==========================================
 // DUKA KENYA ACCOUNT SYSTEM
+// ==========================================
 
 window.accountMode = "login";
 
@@ -262,7 +226,7 @@ window.submitAccount = async function () {
     const name = document.getElementById("accountName").value.trim();
 
     if (!window.dukaSupabase) {
-        message.textContent = "Please wait. Connecting...";
+        message.textContent = "Connecting... Please wait.";
         return;
     }
 
@@ -280,29 +244,30 @@ window.submitAccount = async function () {
 
     try {
         if (window.accountMode === "signup") {
-            const { data, error } = await window.dukaSupabase.auth.signUp({
-                email: email,
-                password: password,
+            const { error } = await window.dukaSupabase.auth.signUp({
+                email,
+                password,
                 options: {
-                    data: {
-                        full_name: name
-                    }
+                    data: { full_name: name }
                 }
             });
 
             if (error) throw error;
 
-            message.textContent = "Account created! Check your email to confirm registration.";
+            message.textContent =
+                "Account created! Check your email to confirm registration.";
+
         } else {
-            const { data, error } = await window.dukaSupabase.auth.signInWithPassword({
-                email: email,
-                password: password
+            const { error } = await window.dukaSupabase.auth.signInWithPassword({
+                email,
+                password
             });
 
             if (error) throw error;
 
             message.textContent = "Login successful! Welcome to DUKA KENYA.";
         }
+
     } catch (error) {
         message.textContent = error.message;
     }
