@@ -207,3 +207,23 @@ function checkout() {
 
 // INITIALIZE SHOPPING SYSTEM
 updateCartCount();
+// DUKA KENYA - SUPABASE CONNECTION
+
+const SUPABASE_URL = "https://lqfofogdythejkguhjaz.supabase.co";
+
+const SUPABASE_KEY = ";sb_publishable_S5HLkybpENjYJJ6100yD7Q_myBMpasa
+
+async function initializeSupabase() {
+    const { createClient } = await import(
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+    );
+
+    window.dukaSupabase = createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    console.log("DUKA KENYA connected to Supabase!");
+}
+
+initializeSupabase();
