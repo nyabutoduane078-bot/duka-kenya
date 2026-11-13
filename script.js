@@ -227,3 +227,83 @@ async function initializeSupabase() {
 }
 
 initializeSupabase();
+// DUKA KENYA ACCOUNT SYSTEM
+
+window.accountMode = "login";
+
+window.showLogin = function () {
+    window.accountMode = "login";
+
+    document.getElementById("accountPopup").style.display = "flex";
+    document.getElementById("accountTitle").textContent = "LOGIN";
+    document.getElementById("accountSubmit").textContent = "LOGIN";
+    document.getElementById("accountName").style.display = "none";
+    document.getElementById("accountMessage").textContent = "";
+};
+
+window.showSignup = function () {
+    window.accountMode = "signup";
+
+    document.getElementById("accountPopup").style.display = "flex";
+    document.getElementById("accountTitle").textContent = "CREATE ACCOUNT";
+    document.getElementById("accountSubmit").textContent = "SIGN UP";
+    document.getElementById("accountName").style.display = "block";
+    document.getElementById("accountMessage").textContent = "";
+};
+
+window.closeAccount = function () {
+    document.getElementById("accountPopup").style.display = "none";
+};
+
+window.submitAccount = async function () {
+    const message = document.getElementById("accountMessage");
+    const email = document.getElementById("accountEmail").value.trim();
+    const password = document.getElementById("accountPassword").value;
+    const name = document.getElementById("accountName").value.trim();
+
+    if (!window.dukaSupabase) {
+        message.textContent = "Please wait. Connecting...";
+        return;
+    }
+
+    if (!email || !password) {
+        message.textContent = "Enter your email and password.";
+        return;
+    }
+
+    if (window.accountMode === "signup" && !name) {
+        message.textContent = "Enter your full name.";
+        return;
+    }
+
+    message.textContent = "Please wait...";
+
+    try {
+        if (window.accountMode === "signup") {
+            const { data, error } = await window.dukaSupabase.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: {
+                        full_name: name
+                    }
+                }
+            });
+
+            if (error) throw error;
+
+            message.textContent = "Account created! Check your email to confirm registration.";
+        } else {
+            const { data, error } = await window.dukaSupabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) throw error;
+
+            message.textContent = "Login successful! Welcome to DUKA KENYA.";
+        }
+    } catch (error) {
+        message.textContent = error.message;
+    }
+};
