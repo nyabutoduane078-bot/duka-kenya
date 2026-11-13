@@ -295,3 +295,32 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* CATEGORY BUTTON IMPROVEMENTS */
+
+.category {
+    border: none;
+    width: 100%;
+    font-family: inherit;
+    transition: 0.3s ease;
+}
+
+.category:hover {
+    background: #f68b1e;
+    color: white;
+    transform: translateY(-5px);
+}
+
+.category p {
+    font-weight: bold;
+}
+
+/* BETTER PRODUCT CARDS */
+
+.product {
+    cursor: pointer;
+}
+
+.product button:hover {
+    background: #222;
+    transition: 0.3s ease;
+}
