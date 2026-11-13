@@ -9,12 +9,64 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+<!-- DUKA KENYA ACCOUNT POPUP -->
+<div id="accountPopup" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.9);
+    z-index:99998;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+">
+    <div style="
+        background:white;
+        color:#222;
+        padding:30px;
+        border-radius:15px;
+        width:100%;
+        max-width:380px;
+        text-align:center;
+    ">
+        <h2 style="color:#ff9900;">DUKA KENYA</h2>
 
+        <h3 id="accountTitle">LOGIN</h3>
+
+        <input id="accountName" type="text"
+        placeholder="Full Name"
+        style="display:none;width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+
+        <input id="accountEmail" type="email"
+        placeholder="Email Address"
+        style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+
+        <input id="accountPassword" type="password"
+        placeholder="Password"
+        style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+
+        <button id="accountSubmit"
+        onclick="submitAccount()"
+        style="background:#ff9900;color:white;padding:13px;width:100%;border:0;border-radius:7px;margin-top:12px;">
+            LOGIN
+        </button>
+
+        <p id="accountMessage"></p>
+
+        <button onclick="closeAccount()"
+        style="background:#333;color:white;padding:10px 20px;border:0;border-radius:7px;">
+            CLOSE
+        </button>
+    </div>
+</div>
 <body>
 
     <!-- HEADER -->
     <header class="header">
-
+<div class="account-buttons">
+    <button onclick="showLogin()">LOGIN</button>
+    <button onclick="showSignup()">SIGN UP</button>
+</div>
         <div class="logo">
             DUKA<span>KENYA</span>
         </div>
