@@ -272,3 +272,62 @@ window.submitAccount = async function () {
         message.textContent = error.message;
     }
 };
+// ==========================================
+// CUSTOMER ACCOUNT STATUS AND LOGOUT
+// ==========================================
+
+function updateCustomerAccount(user) {
+    const accountArea = document.querySelector(".account-buttons");
+
+    if (!accountArea) return;
+
+    if (user) {
+        accountArea.innerHTML = `
+            <span style="color:white;">
+                Welcome, ${user.user_metadata.full_name || user.email}
+            </span>
+            <button onclick="customerLogout()">LOGOUT</button>
+        `;
+    } else {
+        accountArea.innerHTML = `
+            <button onclick="showLogin()">LOGIN</button>
+            <button onclick="showSignup()">SIGN UP</button>
+        `;
+    }
+}
+
+window.customerLogout = async function () {
+    if (!window.dukaSupabase) return;
+
+    const { error } = await window.dukaSupabase.auth.signOut();
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    alert("You have logged out successfully.");
+};
+
+// CHECK CUSTOMER LOGIN STATUS
+async function checkCustomerLogin() {
+    if (!window.dukaSupabase) return;
+
+    const { data } = await window.dukaSupabase.auth.getUser();
+
+    updateCustomerAccount(data.user);
+
+    window.dukaSupabase.auth.onAuthStateChange(
+        (event, session) => {
+            updateCustomerAccount(session?.user || null);
+        }
+    );
+}
+
+// CHECK AFTER SUPABASE LOADS
+const accountCheckInterval = setInterval(() => {
+    if (window.dukaSupabase) {
+        clearInterval(accountCheckInterval);
+        checkCustomerLogin();
+    }
+}, 300);
