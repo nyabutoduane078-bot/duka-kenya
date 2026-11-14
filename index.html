@@ -192,152 +192,105 @@
 
 
     <!-- PRODUCTS -->
-    <section id="products" class="section">
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
 
-        <h2>Popular Products</h2>
+        <h2>Stay Updated!</h2>
 
-        <div class="product-grid">
+        <p>
+            Get updates about new products and special offers.
+        </p>
 
-            <div class="product" data-category="electronics">
+        <input
+            type="email"
+            placeholder="Enter your email address"
+        >
 
-                <div class=><div class="product-image">
-   <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" alt="Smartphone">
+        <button onclick="alert('Newsletter coming soon!')">
+            SUBSCRIBE
+        </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>DUKA KENYA</h2>
+
+        <p>Your Favourite Online Shopping Store.</p>
+
+        <p>Shopping made simple, affordable and convenient.</p>
+
+        <p>© 2026 DUKA KENYA. All rights reserved.</p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+<!-- NO INTERNET POPUP -->
+<div id="offlinePopup" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#080808;
+    color:white;
+    z-index:99999;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+    font-family:Arial,sans-serif;
+">
+    <div>
+        <div style="font-size:75px;">📡</div>
+
+        <h1 style="color:#ff9900;">
+            NO INTERNET CONNECTION
+        </h1>
+
+        <p style="font-size:17px;line-height:1.6;">
+            Please connect to your internet to continue shopping securely.
+        </p>
+
+        <button onclick="checkInternet()" style="
+            background:#ff9900;
+            color:white;
+            border:none;
+            padding:15px 35px;
+            border-radius:8px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        ">
+            TRY AGAIN
+        </button>
+    </div>
 </div>
 
-<h3>Smartphone</h3>
+<script>
+function checkInternet() {
+    if (navigator.onLine) {
+        document.getElementById("offlinePopup").style.display = "none";
+    } else {
+        document.getElementById("offlinePopup").style.display = "flex";
+    }
+}
 
-<p class="price">KSh 15,999</p>
+window.addEventListener("offline", function() {
+    document.getElementById("offlinePopup").style.display = "flex";
+});
 
-<button onclick="addToCart('Smartphone', 15999)">
-    ADD TO CART
-</button>
+window.addEventListener("online", function() {
+    document.getElementById("offlinePopup").style.display = "none";
+});
 
-</div>
-
-<div class="product" data-category="electronics">
-
-                <div class="<div class="product-image">
-   
-                <div class="<div class="product-image">
-    <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
-</div>
-
-<h3>Smart Watch</h3>
-
-<p class="price">KSh 3,999</p>
-
-<button onclick="addToCart('Smart Watch', 3999)">
-    ADD TO CART
-</button>
-
-</div>
-
-<div class="product" data-category="electronics">
-
-                <div class="<div class="product-image">
-   <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500" alt="Laptop">
-</div>
-
-<h3>Laptop</h3>
-
-<p class="price">KSh 45,999</p>
-
-<button onclick="addToCart('Laptop', 45999)">
-    ADD TO CART
-</button>
-
-</div>
-<!-- FASHION -->
-<div class="product" data-category="fashion">
-    <div class="><div class="product-image">
-   <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
-</div>
-
-<h3>Men's Sneakers</h3>
-
-<p class="price">KSh 3,500</p>
-
-<button onclick="addToCart('Mens Sneakers', 3500)">ADD TO CART</button>
-
-</div>
-
-<div class="product" data-category="fashion">
-    <div class="<div class="product-image">
-   <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500" alt="T-Shirt">
-</div>
-
-<h3>Casual T-Shirt</h3>
-
-<p class="price">KSh 850</p>
-
-<button onclick="addToCart('Casual T-Shirt', 850)">ADD TO CART</button>
-
-</div>
-<!-- HOME & LIVING -->
-<div class="product" data-category="home">
-    <div class="<div class="product-image">
-  <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500" alt="Sofa">
-</div>
-
-<h3>Modern Sofa</h3>
-
-<p class="price">KSh 25,000</p>
-
-<button onclick="addToCart('Modern Sofa', 25000)">ADD TO CART</button>
-
-</div>
-
-<!-- BEAUTY -->
-<div class="product" data-category="beauty">
-    <div class="<div class="product-image">
-  <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500" alt="Makeup">
-</div>
-
-<h3>Beauty Makeup Kit</h3>
-
-<p class="price">KSh 1,500</p>
-
-<button onclick="addToCart('Beauty Makeup Kit', 1500)">ADD TO CART</button>
-
-</div>
-
-<!-- ACCESSORIES -->
-<div class="product" data-category="accessories">
-    <div class="<div class="product-image">
-    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500" alt="Sunglasses">
-<div class="product-image">
-    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500" alt="Sunglasses">
-</div>
-
-<h3>Fashion Sunglasses</h3>
-
-<p class="price">KSh 1,200</p>
-
-<button onclick="addToCart('Fashion Sunglasses', 1200)">ADD TO CART</button>
-
-</div>
-
-<div class="product" data-category="accessories">
-    <div class="<div class="product-image">
-  <div class="product-image">
-    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" alt="Backpack">
-</div>
-
-<h3>Travel Backpack</h3>
-
-<p class="price">KSh 2,000</p>
-
-<button onclick="addToCart('Travel Backpack', 2000)">ADD TO CART</button>
-
-</div>
-
+window.addEventListener("load", checkInternet);
+</script>
+</body>
+</html>
+    
         </div>
 
     </section>
