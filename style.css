@@ -399,3 +399,129 @@ footer {
 .product:hover .product-image img {
     transform: scale(1.08);
 }
+/* =================================
+   DUKA KENYA MARKETPLACE DESIGN
+================================= */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.product {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: 0.25s ease;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 16px rgba(0,0,0,0.15);
+}
+
+.product-image {
+    width: 100%;
+    height: 190px;
+    background: #f7f7f7;
+    border-radius: 7px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product:hover .product-image img {
+    transform: scale(1.07);
+}
+
+.product h3 {
+    font-size: 15px;
+    min-height: 38px;
+    margin: 8px 0;
+    color: #333;
+}
+
+.product .price {
+    color: #f68b1e;
+    font-size: 19px;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.product button {
+    width: 100%;
+    padding: 11px 5px;
+    background: #f68b1e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.product button:hover {
+    background: #222;
+}
+
+#productDetailsPopup {
+    backdrop-filter: blur(4px);
+}
+
+#productDetailsPopup > div {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* TABLETS */
+
+@media (max-width: 1000px) {
+    .product-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .product-image {
+        height: 160px;
+    }
+}
+
+/* PHONES */
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .product {
+        padding: 9px;
+    }
+
+    .product-image {
+        height: 145px;
+    }
+
+    .product h3 {
+        font-size: 13px;
+    }
+
+    .product .price {
+        font-size: 16px;
+    }
+
+    .product button {
+        font-size: 11px;
+        padding: 10px 4px;
+    }
+}
