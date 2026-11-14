@@ -331,3 +331,29 @@ const accountCheckInterval = setInterval(() => {
         checkCustomerLogin();
     }
 }, 300);
+// =================================
+// DUKA KENYA PRODUCT DETAILS
+// =================================
+
+window.showProductDetails = function(name, price, image, description) {
+
+    document.getElementById("detailName").textContent = name;
+
+    document.getElementById("detailPrice").textContent =
+        "KSh " + Number(price).toLocaleString("en-KE");
+
+    document.getElementById("detailImage").src = image;
+
+    document.getElementById("detailDescription").textContent = description;
+
+    document.getElementById("detailCartButton").onclick = function() {
+        addToCart(name, Number(price));
+        closeProductDetails();
+    };
+
+    document.getElementById("productDetailsPopup").style.display = "flex";
+};
+
+window.closeProductDetails = function() {
+    document.getElementById("productDetailsPopup").style.display = "none";
+};
